@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package mail;
+
+message Email {
+  string id = 1;
+  string sender = 2;
+  string subject = 3;
+  string snippet = 4;
+  string body = 5;
+  string date = 6;
+  bool is_unread = 7;
+}
+
+message GetInboxRequest {
+  int32 max_results = 1;
+  string page_token = 2;
+}
+
+message GetInboxResponse {
+  repeated Email emails = 1;
+  string next_page_token = 2;
+}
+
+message GetSentRequest {
+  int32 max_results = 1;
+  string page_token = 2;
+}
+
+message GetSentResponse {
+  repeated Email emails = 1;
+  string next_page_token = 2;
+}
+
+message GetEmailByIdRequest {
+  string email_id = 1;
+}
+
+message GetEmailByIdResponse {
+  Email email = 1;
+  bool found = 2;
+}
+
+message SendEmailRequest {
+  string to = 1;
+  string subject = 2;
+  string body = 3;
+}
+
+message SendEmailResponse {
+  string id = 1;
+  string thread_id = 2;
+}
+
+message SearchEmailsRequest {
+  string query = 1;
+  int32 max_results = 2;
+  string page_token = 3;
+}
+
+message SearchEmailsResponse {
+  repeated Email emails = 1;
+  string next_page_token = 2;
+}
+
+service MailService {
+  rpc GetInbox(GetInboxRequest) returns (GetInboxResponse);
+  rpc GetSent(GetSentRequest) returns (GetSentResponse);
+  rpc GetEmailById(GetEmailByIdRequest) returns (GetEmailByIdResponse);
+  rpc SendEmail(SendEmailRequest) returns (SendEmailResponse);
+  rpc SearchEmails(SearchEmailsRequest) returns (SearchEmailsResponse);
+}

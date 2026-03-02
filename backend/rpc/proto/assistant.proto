@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package assistant;
+
+message AssistantRequest {
+  string message = 1;
+  string current_view = 2;
+  string current_email_id = 3;
+}
+
+message AssistantResponse {
+  string action_json = 1;
+}
+
+service AssistantService {
+  rpc ProcessMessage(AssistantRequest) returns (AssistantResponse);
+}
