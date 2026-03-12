@@ -1,0 +1,29 @@
+# Env and secrets
+.env
+*.json
+!pyproject.toml
+token.json
+credentials.json
+client_secret*.json
+
+# Do not create grpc/ here – it shadows the grpcio library. Use rpc/ for our gRPC code.
+grpc/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Generated proto (optional – uncomment if you want to regenerate only via script)
+# generated/
